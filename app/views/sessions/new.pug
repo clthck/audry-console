@@ -1,0 +1,5 @@
+form(method='post' action=router.url('login'))
+  input(name='username' placeholder='Username')
+  input(name='password' placeholder='Password')
+  button(type='submit') Login
+  p= JSON.stringify(flash)

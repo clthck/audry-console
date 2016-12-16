@@ -1,0 +1,3 @@
+# Rename this file to '.env' before starting the app.
+
+DATABASE_URL=""
