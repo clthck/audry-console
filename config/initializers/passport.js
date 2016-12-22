@@ -2,39 +2,37 @@
 
 const passport = require('koa-passport');
 const LocalStrategy = require('passport-local').Strategy;
-const models = require('audry-common').models;
-const User = models.User;
+const { User } = require('audry-common').models;
 
 module.exports = () => {
-  passport.use(new LocalStrategy( (username, password, done) => {
-    User
-      .findOne({ where: { username } })
-      .then(user => {
-        if (user == null) {
-          return done(null, false, { message: "User doesn't exist." });
-        }
-
-        if (user.authenticate(password)) {
-          return done(null, user);
-        }
-
-        return done(null, false, { message: 'Incorrect password.' });
-      })
-      .catch(err => done(err) );
+  passport.use(new LocalStrategy(async (username, password, done) => {
+    try {
+      const user = await User.findOne({ where: { username } });
+      if (user === null) {
+        return done(null, false, { message: "User doesn't exist." });
+      } else if (user.authenticate(password)) {
+        return done(null, user);
+      }
+      return done(null, false, { message: 'Incorrect password.' });
+    }
+    catch (err) {
+      return done(err);
+    }
   }));
 
-  passport.serializeUser( (user, done) => done(null, user.id) );
-  passport.deserializeUser( (id, done) => {
-    User
-      .findById(id)
-      .then(user => {
-        if (user == null) {
-          done(new Error('Invalid user id.'));
-        } else {
-          done(null, user);
-        }
-      })
-      .catch(err => done(err, null));
+  passport.serializeUser((user, done) => done(null, user.id));
+  passport.deserializeUser(async (id, done) => {
+    try {
+      const user = await User.findById(id);
+      if (user == null) {
+        done(new Error('Invalid user id.'));
+      } else {
+        done(null, user);
+      }
+    }
+    catch (err) {
+      return done(err, null);
+    }
   });
 
   return {

@@ -11,9 +11,9 @@ const routers = {
 
 const routerMock = {
   url: name => {
-    for (let routerType in routers) {
-      if (routers[routerType].route(name)) {
-        return routers[routerType].url(name);
+    for (const i in routers) {
+      if (routers[i].route(name)) {
+        return routers[i].url(name);
       }
     }
     return routers.unauthenticated.url(name);
@@ -24,14 +24,26 @@ module.exports = (app, pug) => {
   app.context.router = routerMock;
   pug.locals.router = routerMock;
 
-  configRoutes(routers);
+  // Handles error that occurs while processing requests.
+  for (const i in routers) {
+    routers[i].use(async (ctx, next) => {
+      try {
+        await next();
+      } catch (err) {
+        console.log(`ERROR: ${err.stack}`);
+        ctx.render('error', { err });
+      }
+    });
+  }
 
-  app.use(routers.unauthenticated.routes());
-  app.use(routers.unauthenticated.allowedMethods());
+  configRoutes(routers);
 
   const unauthenticatedRoutesInfo =_.map(
     routers.unauthenticated.stack, layer => [layer.regexp, layer.methods]
   );
+
+  app.use(routers.unauthenticated.routes());
+  app.use(routers.unauthenticated.allowedMethods());
   app.use( (ctx, next) => {
     let requireAuthentication = false;
     for (const [regexp, methods] of unauthenticatedRoutesInfo) {
@@ -44,7 +56,6 @@ module.exports = (app, pug) => {
       return next();
     }
   });
-
   app.use(routers.authenticated.routes());
   app.use(routers.authenticated.allowedMethods());
 };

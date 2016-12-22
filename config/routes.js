@@ -1,18 +1,17 @@
 'use strict';
 
-const sessions = require('../app/controllers/sessions_controller.js');
 const authentication = require('../app/controllers/concerns/authentication.js');
-const activities = require('../app/controllers/activities_controller.js');
+const { sessions, activities } = require('../app/controllers');
 
 module.exports = (routers) => {
-  // Router for unauthenticated URLs.
+  // Resources that don't need authentication.
   routers.unauthenticated
     .get('login', '/login', sessions.new)
     .post('/login', sessions.create);
 
-  // Router for authenticated URLs.
+  // Resources that require authentication.
   routers.authenticated
     .use(authentication.do)
-    .get('/', activities.index)
+    .get('root', '/', activities.index)
     .get('logout', '/logout', sessions.destroy);
 };
