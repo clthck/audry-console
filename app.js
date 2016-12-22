@@ -1,19 +1,14 @@
 'use strict';
 
-const nodeEnv = process.env.NODE_ENV || 'dev';
-let pry = nodeEnv === 'dev' ? require('pryjs') : null;
-
 require('dotenv').config();
 
-const fs = require('fs');
-const path = require('path');
 const koa = require('koa');
 const Pug = require('koa-pug');
 const session = require('koa-session');
 const parseBody = require('koa-body');
 const flash = require('koa-connect-flash');
 const passport = require('./config/initializers/passport.js')();
-const initRoutes = require('./config/routes.js');
+const initRoutes = require('./config/initializers/routes.js');
 
 // Initializes koa.js app.
 const app = koa();

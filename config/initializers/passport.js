@@ -2,20 +2,19 @@
 
 const passport = require('koa-passport');
 const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcrypt');
-const Model = require('../../app/models');
-const User = Model.User;
+const models = require('audry-common').models;
+const User = models.User;
 
 module.exports = () => {
   passport.use(new LocalStrategy( (username, password, done) => {
     User
-      .findOne({ where: { 'username': username } })
+      .findOne({ where: { username } })
       .then(user => {
         if (user == null) {
           return done(null, false, { message: "User doesn't exist." });
         }
 
-        if (bcrypt.compareSync(password, user.password)) {
+        if (user.authenticate(password)) {
           return done(null, user);
         }
 
