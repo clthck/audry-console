@@ -1,11 +1,11 @@
 'use strict';
 
 module.exports = {
-  do: function *(next) {
-    if (this.isAuthenticated()) {
-      yield next;
+  do: (ctx, next) => {
+    if (ctx.isAuthenticated()) {
+      return next();
     } else {
-      this.redirect(this.router.url('login'));
+      ctx.redirect(ctx.router.url('login'));
     }
   }
 };

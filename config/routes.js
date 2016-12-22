@@ -8,7 +8,7 @@ module.exports = (routers) => {
   // Router for unauthenticated URLs.
   routers.unauthenticated
     .get('login', '/login', sessions.new)
-    .post('/login', sessions.create());
+    .post('/login', sessions.create);
 
   // Router for authenticated URLs.
   routers.authenticated

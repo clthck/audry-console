@@ -29,10 +29,19 @@ module.exports = (app, pug) => {
   app.use(routers.unauthenticated.routes());
   app.use(routers.unauthenticated.allowedMethods());
 
-  const unauthenticatedRoutePaths = _.pluck(routers.unauthenticated.stack, 'path');
-  app.use(function *(next) {
-    if (unauthenticatedRoutePaths.includes(this.url) !== true) {
-      yield next;
+  const unauthenticatedRoutesInfo =_.map(
+    routers.unauthenticated.stack, layer => [layer.regexp, layer.methods]
+  );
+  app.use( (ctx, next) => {
+    let requireAuthentication = false;
+    for (const [regexp, methods] of unauthenticatedRoutesInfo) {
+      if (regexp.test(ctx.path) && methods.includes(ctx.method)) {
+        requireAuthentication = true;
+        break;
+      }
+    }
+    if (!requireAuthentication) {
+      return next();
     }
   });
 

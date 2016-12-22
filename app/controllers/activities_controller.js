@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = {
-  index: function *(next) {
-    this.render('activities/index');
-    yield next;
+  index: (ctx, next) => {
+    ctx.render('activities/index');
+    return next();
   }
 };
