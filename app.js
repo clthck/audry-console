@@ -4,9 +4,12 @@ require('dotenv').config();
 
 const Koa = require('koa');
 const convert = require('koa-convert');
+const mount = require('koa-mount');
 const Pug = require('koa-pug');
-const session = require('koa-session');
+const session = require('koa-session2');
 const parseBody = require('koa-body');
+const serveSass = require('koa.sass');
+const serveStatic = require('koa-static');
 const flash = require('koa-connect-flash');
 const passport = require('./config/initializers/passport.js')();
 const initRoutes = require('./config/initializers/routes.js');
@@ -21,10 +24,17 @@ const pug = new Pug({
   app: app
 });
 
-app.keys = ['AUDRY WEB CONSOLE: WARNING!!! CLASSIFIED'];
-app.use(convert(session(app)));
+app.use(async (ctx, next) => {
+  try {
+    await next();
+  } catch (err) {
+    console.log(`ERROR: ${err.stack}`);
+  }
+});
 
-app.use(flash());
+app.use(session({ key: 'AUDRY_SESSION' }));
+
+app.use(convert(flash()));
 app.use(async (ctx, next) => {
   pug.locals.flash = ctx.flash();
   return next();
@@ -35,5 +45,13 @@ app.use(passport.initialize);
 app.use(passport.session);
 
 initRoutes(app, pug);
+
+app.use(serveSass({
+  mountAt: '/assets',
+  src: './app/assets/stylesheets',
+  dest: './.tmp/stylesheets'
+}));
+app.use(mount('/assets', serveStatic('./node_modules')));
+app.use(mount('/assets', serveStatic('./app/assets/javascripts')));
 
 app.listen(3000);
