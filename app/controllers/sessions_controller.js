@@ -5,7 +5,7 @@ const passport = require('koa-passport');
 module.exports = {
   new: (ctx, next) => {
     if (ctx.isAuthenticated()) {
-      ctx.redirect(ctx.router.url('root'));
+      ctx.redirect(ctx.router.rootPath);
     } else {
       ctx.render('sessions/new');
     }
@@ -16,9 +16,9 @@ module.exports = {
     return passport.authenticate('local', (err, user, info, status) => {
       if (user === false) {
         ctx.flash('error', info.message);
-        ctx.redirect(ctx.router.url('login'));
+        ctx.redirect(ctx.router.loginPath);
       } else {
-        ctx.redirect(ctx.router.url('root'));
+        ctx.redirect(ctx.router.rootPath);
         return ctx.login(user);
       }
     })(ctx, next);
@@ -26,7 +26,7 @@ module.exports = {
 
   destroy: (ctx, next) => {
     ctx.logout();
-    ctx.redirect(ctx.router.url('login'));
+    ctx.redirect(ctx.router.loginPath);
     return next();
   }
 };

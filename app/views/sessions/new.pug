@@ -1,7 +1,7 @@
 extends ../layouts/default
 
 block contents
-  form(method='post' action=router.url('login'))
+  form(method='post' action=router.loginPath)
     input(name='username' placeholder='Username')
     input(name='password' placeholder='Password')
     button(type='submit') Login

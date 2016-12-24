@@ -38,6 +38,15 @@ module.exports = (app, pug) => {
 
   configRoutes(routers);
 
+  // Defines magic path helper properties.
+  for (const i in routers) {
+    for (const layer of routers[i].stack) {
+      if (layer.name) {
+        routerMock[layer.name + 'Path'] = routers[i].url(layer.name);
+      }
+    }
+  }
+
   const unauthenticatedRoutesInfo =_.map(
     routers.unauthenticated.stack, layer => [layer.regexp, layer.methods]
   );

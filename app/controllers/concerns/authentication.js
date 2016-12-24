@@ -5,7 +5,7 @@ module.exports = {
     if (ctx.isAuthenticated()) {
       return next();
     } else {
-      ctx.redirect(ctx.router.url('login'));
+      ctx.redirect(ctx.router.loginPath);
     }
   }
 };
