@@ -1,0 +1,23 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background-color: #222;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  .logo {
+    height: 25px;
+  }
+}
+
+main {
+  display: flex;
+  align-items: center;
+  flex: 1 0 auto;
+}
