@@ -36,7 +36,18 @@ app.use(session({ key: 'AUDRY_SESSION' }));
 
 app.use(convert(flash()));
 app.use(async (ctx, next) => {
-  pug.locals.flash = ctx.flash();
+  const flash = ctx.flash();
+  let matches;
+
+  pug.locals.flash = {};
+  for (const flashKey in flash) {
+    matches = flashKey.match(/^view\.(.+)/);
+    if (matches) {
+      pug.locals.flash[matches[1]] = flash[flashKey];
+    } else {
+      ctx.flash(flashKey, flash[flashKey]);
+    }
+  }
   return next();
 });
 
