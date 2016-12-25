@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    title= `Audry Admin Console ${title}`
+    link(rel='stylesheet' type='text/css' href='assets/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet' type='text/css' href='assets/application.css')
+
+    script(src='assets/bootstrap/dist/js/bootstrap.min.js')
+
+  body(data-route=`${controller().name}/${controller().actionName}`)
+    header.container-fluid
+      img.logo(src='assets/logo-hospital.png')
+    main.container-fluid
+      block contents
+    footer
