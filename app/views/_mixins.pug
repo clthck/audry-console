@@ -1,0 +1,4 @@
+mixin flash(flash, type)
+  if flash[type]
+    if type === 'error'
+      .alert.alert-danger(role='alert') Error: #{flash[type]}

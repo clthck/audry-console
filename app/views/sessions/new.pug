@@ -1,8 +1,26 @@
 extends ../layouts/application
+include ../_mixins
 
 block contents
-  form(method='post' action=router.loginPath)
-    input(name='username' placeholder='Username')
-    input(name='password' placeholder='Password')
-    button(type='submit') Login
-    p= JSON.stringify(flash)
+  .row
+    #login_form_container.card.card-block.row
+      form(method='post' action=router.loginPath)
+        +flash(flash, 'error')
+        .form-group.row
+          label.col-sm-3.col-form-label(for='username') Username:
+          .col-sm-9
+            input.form-control#username(name='username' placeholder='Username')
+        .form-group.row
+          label.col-sm-3.col-form-label(for='password') Password:
+          .col-sm-9
+            input.form-control#password(name='password' placeholder='Password' type='password')
+        .btn-group(role='group')
+          button.btn.btn-outline-danger(type='reset') Cancel
+          button.btn.btn-outline-primary(type='submit') OK
+
+    .row
+      img.logo-large(src='assets/logo-hospital.png')
+    .row
+      img.logo-nurse-app(src='assets/logo-nurse-app.png')
+    .row
+      img.logo-tecodo(src='assets/logo-tecodo.png')
