@@ -1,0 +1,18 @@
+extends application
+
+block header-contents-followup
+  .row#top_navbar.bg-faded
+    nav.navbar.navbar-light
+      ul.nav.navbar-nav
+        li.nav-item: span.nav-link Configure:
+        li.nav-item.dropdown
+          a.nav-link.dropdown-toggle#dropdownConfigButton(href='#' data-toggle='dropdown' aria-haspopup=true aria-expanded=false) Hospital
+          .dropdown-menu(aria-labelledby='dropdownConfigButton')
+            a.dropdown-item.active(href=router.newHospitalPath) Hospital
+            a.dropdown-item(href='#') Wards
+            a.dropdown-item(href='#') Services
+            a.dropdown-item(href='#') Service Levels
+        li.nav-item.float-xs-right
+          a.btn.btn-outline-primary.btn(href='#') Back
+        li.nav-item.float-xs-right
+          a.btn.btn-outline-primary.btn(href='#') Save
