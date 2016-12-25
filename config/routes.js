@@ -1,7 +1,6 @@
 'use strict';
 
-const authentication = require('../app/controllers/concerns/authentication.js');
-const { sessions, activities } = require('../app/controllers');
+const { sessions, activities, hospitals } = require('../app/controllers');
 
 module.exports = (routers) => {
   // Resources that don't need authentication.
@@ -11,7 +10,7 @@ module.exports = (routers) => {
 
   // Resources that require authentication.
   routers.authenticated
-    .use(authentication.do)
     .get('root', '/', activities.index)
-    .get('logout', '/logout', sessions.destroy);
+    .get('logout', '/logout', sessions.destroy)
+    .get('newHospital', '/hospitals/new', hospitals.new);
 };

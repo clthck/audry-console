@@ -3,6 +3,8 @@
 const Router = require('koa-router');
 const _ = require('underscore');
 const configRoutes = require('../routes.js');
+const controllers = require('../../app/controllers');
+const authentication = require('../../app/controllers/concerns/authentication.js');
 
 const routers = {
   unauthenticated: new Router(),
@@ -20,11 +22,30 @@ const routerMock = {
   }
 };
 
-module.exports = (app, pug) => {
-  app.context.router = routerMock;
-  pug.locals.router = routerMock;
+function defineControllerMethod(ctx) {
+  let actionFunc = null;
 
-  // Handles error that occurs while processing requests.
+  for (const i in routers) {
+    for (const { methods, regexp, stack } of routers[i].stack) {
+      if (methods.includes(ctx.method) && regexp.test(ctx.path)) {
+        actionFunc = _.last(stack);
+        break;
+      }
+    }
+
+    if (actionFunc) {
+      for (const controllerName in controllers) {
+        if (controllers[controllerName][actionFunc.name] && controllers[controllerName][actionFunc.name] === actionFunc) {
+          return () => ({ name: controllerName, actionName: actionFunc.name });
+        }
+      }
+    }
+  }
+}
+
+module.exports = (app, pug) => {
+  // Handles error that occurs while processing requests and
+  // defines `controller` helper method.
   for (const i in routers) {
     routers[i].use(async (ctx, next) => {
       try {
@@ -33,13 +54,18 @@ module.exports = (app, pug) => {
         console.log(`ERROR: ${err.stack}`);
         ctx.render('error', { err });
       }
+    }, (ctx, next) => {
+      app.context.controller = pug.locals.controller = defineControllerMethod(ctx);
+      return next();
     });
   }
 
+  routers.authenticated.use(authentication.do);
+
   configRoutes(routers);
 
-  // Defines magic path helper properties.
   for (const i in routers) {
+    // Defines magic path helper properties.
     for (const layer of routers[i].stack) {
       if (layer.name) {
         routerMock[layer.name + 'Path'] = routers[i].url(layer.name);
@@ -47,7 +73,9 @@ module.exports = (app, pug) => {
     }
   }
 
-  const unauthenticatedRoutesInfo =_.map(
+  app.context.router = pug.locals.router = routerMock;
+
+  const unauthenticatedRoutesInfo = _.map(
     routers.unauthenticated.stack, layer => [layer.regexp, layer.methods]
   );
 
@@ -56,7 +84,7 @@ module.exports = (app, pug) => {
   app.use( (ctx, next) => {
     let requireAuthentication = false;
     for (const [regexp, methods] of unauthenticatedRoutesInfo) {
-      if (regexp.test(ctx.path) && methods.includes(ctx.method)) {
+      if (methods.includes(ctx.method) && regexp.test(ctx.path)) {
         requireAuthentication = true;
         break;
       }
