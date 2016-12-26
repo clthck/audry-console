@@ -3,6 +3,7 @@
 const passport = require('koa-passport');
 const qs = require('querystring');
 const jwt = require('jsonwebtoken');
+const _ = require('underscore');
 
 module.exports = {
   new: (ctx, next) => {
@@ -20,7 +21,7 @@ module.exports = {
   },
 
   create: (ctx, next) => {
-    const redirectTo = ctx.flash('loginRedirect')[0];
+    const redirectTo = _.last(ctx.flash('loginRedirect'));
     return passport.authenticate('local', (err, user, info, status) => {
       if (user === false) {
         ctx.flash('view.error', info.message);
