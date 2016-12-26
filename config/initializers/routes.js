@@ -2,6 +2,7 @@
 
 const Router = require('koa-router');
 const _ = require('underscore');
+const passport = require('koa-passport');
 const configRoutes = require('../routes.js');
 const controllers = require('../../app/controllers');
 const authentication = require('../../app/controllers/concerns/authentication.js');
@@ -44,8 +45,9 @@ function defineControllerMethod(ctx) {
 }
 
 module.exports = (app, pug) => {
-  // Handles error that occurs while processing requests and
-  // defines `controller` helper method.
+  // Handles error that occurs while processing requests,
+  // defines `controller` helper method,
+  // and use "remember-me" passport strategy.
   for (const i in routers) {
     routers[i].use(async (ctx, next) => {
       try {
@@ -57,7 +59,7 @@ module.exports = (app, pug) => {
     }, (ctx, next) => {
       app.context.controller = pug.locals.controller = defineControllerMethod(ctx);
       return next();
-    });
+    }, passport.authenticate('remember-me'));
   }
 
   routers.authenticated.use(authentication.do);

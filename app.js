@@ -20,7 +20,7 @@ const app = new Koa();
 // Configures pug template engine
 const pug = new Pug({
   viewPath: './app/views',
-  noCache: process.env.NODE_ENV === 'development',
+  noCache: app.env === 'development',
   app: app
 });
 
