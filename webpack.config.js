@@ -1,4 +1,6 @@
+const path = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   context: __dirname,
@@ -14,9 +16,20 @@ module.exports = {
     filename: '[name].js',
     path: './public/assets/webpack'
   },
+  resolve: {
+    alias: {
+      components: path.resolve('./app/assets/javascripts/components'),
+      comsass: path.resolve('./app/assets/stylesheets/components')
+    }
+  },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest']
+    }),
+    new ExtractTextPlugin({
+      filename: 'components.css',
+      disable: false,
+      allChunks: true
     })
   ],
   module: {
@@ -30,6 +43,12 @@ module.exports = {
       test: /\.js$/,
       exclude: /(node_modules|bower_components)/,
       loader: 'babel-loader'
+    }, {
+      test: /\.scss$/,
+      loader: ExtractTextPlugin.extract({
+        notExtractLoader: 'style-loader',
+        loader: 'css-loader!sass-loader'
+      })
     }]
   }
 };
