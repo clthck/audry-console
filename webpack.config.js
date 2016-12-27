@@ -5,7 +5,7 @@ module.exports = {
   entry: {
     vendor: [
       'babel-polyfill',
-      'jquery',
+      'jquery-ujs',
       'bootstrap',
     ],
     application: './app/assets/javascripts/application'
@@ -23,6 +23,9 @@ module.exports = {
     rules: [{
       test: require.resolve('bootstrap'),
       loader: 'imports-loader?jQuery=jquery&window.Tether=tether'
+    }, {
+      test: require.resolve('jquery-ujs'),
+      loader: 'imports-loader?jQuery=jquery'
     }, {
       test: /\.js$/,
       exclude: /(node_modules|bower_components)/,

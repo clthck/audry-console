@@ -2,7 +2,7 @@ extends ../layouts/application
 include ../_mixins
 
 block contents
-  .row
+  .mx-auto.row
     #login_form_container.card.card-block.row
       form(method='post' action=router.loginPath)
         +flash(flash, 'error')
@@ -16,7 +16,7 @@ block contents
             input.form-control#password(name='password' placeholder='Password' type='password')
         .btn-group(role='group')
           button.btn.btn-outline-danger(type='reset') Cancel
-          button.btn.btn-outline-primary(type='submit') OK
+          button.btn.btn-outline-primary(type='submit' data-disable-with='Processing...') OK
 
     .row
       img.logo-large(src='assets/logo-hospital.png')
