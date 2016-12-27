@@ -62,8 +62,8 @@ app.use(serveSass({
   src: './app/assets/stylesheets',
   dest: './.tmp/stylesheets'
 }));
+app.use(mount('/assets', serveStatic('./public/assets/webpack')));
 app.use(mount('/assets', serveStatic('./node_modules')));
-app.use(mount('/assets', serveStatic('./app/assets/javascripts')));
 app.use(mount('/assets', serveStatic('./app/assets/images')));
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);

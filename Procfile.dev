@@ -1,0 +1,2 @@
+app: PORT=3000 NODE_ENV=development node --harmony-async-await app.js
+webpack: sh -c 'rm public/assets/webpack/* || true && npm run build:dev'

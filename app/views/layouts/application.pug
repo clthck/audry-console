@@ -7,9 +7,8 @@ html
     link(rel='stylesheet' type='text/css' href='/assets/bootstrap/dist/css/bootstrap.min.css')
     link(rel='stylesheet' type='text/css' href='/assets/application.css')
 
-    script(src='/assets/jquery/dist/jquery.min.js')
-    script(src='/assets/tether/dist/js/tether.min.js')
-    script(src='/assets/bootstrap/dist/js/bootstrap.min.js')
+    script(src='/assets/manifest.js')
+    script(src='/assets/vendor.js')
 
   body(data-route=`${controller().name}/${controller().actionName}`)
     header.container-fluid
@@ -17,7 +16,9 @@ html
         img.logo(src='/assets/logo-hospital.png')
       block header-contents-followup
 
-    main.container-fluid
+    main.container-fluid.w-100
       block contents
 
     footer
+
+    script(src='/assets/application.js')
