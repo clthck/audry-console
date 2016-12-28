@@ -1,30 +1,30 @@
 extends ../layouts/config
 
 block contents
-  .row.w-100: form
+  .row.w-100: form(method='post' action=router.hospitalsPath enctype='multipart/form-data')
     .col-sm-6
       .form-group.row
         label.col-sm-2.col-form-label.text-xs-right Name:
-        .col-sm-4: input.form-control
+        .col-sm-4: input.form-control(name='name')
       .form-group.row
         label.col-sm-2.col-form-label.text-xs-right Division:
-        .col-sm-4: input.form-control
+        .col-sm-4: input.form-control(name='division')
       .form-group.row
         label.col-sm-2.col-form-label.text-xs-right Address:
-        .col-sm-10: input.form-control
+        .col-sm-10: input.form-control(name='address1')
       .form-group.row
-        .col-sm-10.offset-sm-2: input.form-control
+        .col-sm-10.offset-sm-2: input.form-control(name='address2')
       .form-group.row
         label.col-sm-2.col-form-label.text-xs-right City:
-        .col-sm-4: input.form-control
+        .col-sm-4: input.form-control(name='city')
         label.col-sm-1.col-form-label.text-xs-right State:
-        .col-sm-2: input.form-control
+        .col-sm-2: input.form-control(name='state')
         label.col-sm-1.col-form-label.text-xs-right Zip:
-        .col-sm-2: input.form-control
+        .col-sm-2: input.form-control(name='zipcode')
       .form-group.row
         label.col-sm-2.col-form-label.text-xs-right Beacon UUID:
-        .col-sm-7: input.form-control
+        .col-sm-7: input.form-control(name='beaconUuid')
         label.col-sm-1.col-form-label.text-xs-right Major:
-        .col-sm-2: input.form-control
+        .col-sm-2: input.form-control(name='major')
     .col-sm-5.offset-xs-1
       #logo-upload-container

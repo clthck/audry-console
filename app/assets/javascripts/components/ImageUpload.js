@@ -45,7 +45,7 @@ export default class ImageUpload extends React.Component {
 
     return (
       <div className={[styles.topContainer, props.className].join(' ')} id={this.id}>
-        <input type="file" className={styles.file} accept="image/*" />
+        <input type="file" className={styles.file} accept="image/*" name={props.name} />
         <p className={styles.title}>{props.title}</p>
         <div className={styles.preview}>
           <img src={props.placeholderImage} />

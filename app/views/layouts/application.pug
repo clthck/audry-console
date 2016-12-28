@@ -11,7 +11,7 @@ html
     script(src='/assets/manifest.js')
     script(src='/assets/vendor.js')
 
-  body(data-route=`${controller().name}/${controller().actionName}`)
+  body(data-route=`${controller.name}/${controller.actionName}`)
     header.container-fluid
       #top_most.row
         img.logo(src='/assets/logo-hospital.png')

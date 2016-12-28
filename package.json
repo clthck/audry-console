@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nf start --procfile Procfile.dev",
+    "start-wwp": "PORT=3000 NODE_ENV=development node --harmony-async-await app.js",
     "build:dev": "node_modules/.bin/webpack -w --config webpack.config.js",
     "db:seed": "cd node_modules/audry-common && npm run db:seed && cd ../..",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,7 +21,9 @@
   },
   "homepage": "https://github.com/uphack/audry-console#readme",
   "dependencies": {
+    "async-busboy": "^0.3.3",
     "bootstrap": "^4.0.0-alpha.5",
+    "cloudinary": "^1.4.6",
     "dotenv": "^2.0.0",
     "jquery": "^3.1.1",
     "jquery-ujs": "^1.2.2",
@@ -29,6 +32,7 @@
     "koa-body": "^2.0.0",
     "koa-connect-flash": "^0.1.2",
     "koa-convert": "^1.2.0",
+    "koa-methodoverride": "git+https://git@github.com/clthck/methodoverride.git",
     "koa-mount": "^2.0.0",
     "koa-passport": "^3.0.0-rc.2",
     "koa-pug": "^3.0.0-1",

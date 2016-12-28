@@ -1,11 +1,11 @@
 'use strict';
 
+const path = require('path');
 const Router = require('koa-router');
 const _ = require('underscore');
 const passport = require('koa-passport');
 const configRoutes = require('../routes.js');
 const controllers = require('../../app/controllers');
-const authentication = require('../../app/controllers/concerns/authentication.js');
 
 const routers = {
   unauthenticated: new Router(),
@@ -24,7 +24,30 @@ const routerMock = {
 };
 
 function defineControllerMethod(ctx) {
+  let controllerName;
   let actionFunc = null;
+
+  const getController = (obj, actionFunc) => {
+    let objKeys;
+    let controllerName = '';
+
+    for (const key in obj) {
+      objKeys = Object.keys(obj[key]);
+      if (objKeys.length > 0 && typeof obj[key][objKeys[0]] === 'function') {
+        if (Object.values(obj[key]).includes(actionFunc)) {
+          controllerName = key;
+          break;
+        }
+      } else {
+        controllerName = getController(obj[key], actionFunc);
+        if (controllerName !== '') {
+          controllerName = path.join(key, controllerName);
+          break;
+        }
+      }
+    }
+    return controllerName;
+  };
 
   for (const i in routers) {
     for (const { methods, regexp, stack } of routers[i].stack) {
@@ -35,10 +58,9 @@ function defineControllerMethod(ctx) {
     }
 
     if (actionFunc) {
-      for (const controllerName in controllers) {
-        if (controllers[controllerName][actionFunc.name] && controllers[controllerName][actionFunc.name] === actionFunc) {
-          return () => ({ name: controllerName, actionName: actionFunc.name });
-        }
+      controllerName = getController(controllers, actionFunc);
+      if (controllerName !== '')  {
+        return { name: controllerName, actionName: actionFunc.name };
       }
     }
   }
@@ -61,8 +83,6 @@ module.exports = (app, pug) => {
       return next();
     }, passport.authenticate('remember-me'));
   }
-
-  routers.authenticated.use(authentication.do);
 
   configRoutes(routers);
 
