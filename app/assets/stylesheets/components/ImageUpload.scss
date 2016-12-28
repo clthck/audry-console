@@ -1,0 +1,29 @@
+$width: 400px;
+$height: 200px;
+$border-width: 1px;
+
+:local
+.top-container {
+  width: $width + $border-width;
+
+  .title {
+    margin-bottom: 5px;
+    text-align: center;
+  }
+
+  .preview {
+    border: $border-width solid #eee;
+    box-sizing: content-box;
+    width: $width;
+
+    img {
+      display: block;
+      height: $height;
+      margin: 0 auto;
+    }
+  }
+
+  .file {
+    display: none;
+  }
+}

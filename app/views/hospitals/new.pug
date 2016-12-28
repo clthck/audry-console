@@ -1,6 +1,30 @@
 extends ../layouts/config
 
 block contents
-  .row
-    h1 New Hospital
-    a(href=router.logoutPath) Logout
+  .row.w-100: form
+    .col-sm-6
+      .form-group.row
+        label.col-sm-2.col-form-label.text-xs-right Name:
+        .col-sm-4: input.form-control
+      .form-group.row
+        label.col-sm-2.col-form-label.text-xs-right Division:
+        .col-sm-4: input.form-control
+      .form-group.row
+        label.col-sm-2.col-form-label.text-xs-right Address:
+        .col-sm-10: input.form-control
+      .form-group.row
+        .col-sm-10.offset-sm-2: input.form-control
+      .form-group.row
+        label.col-sm-2.col-form-label.text-xs-right City:
+        .col-sm-4: input.form-control
+        label.col-sm-1.col-form-label.text-xs-right State:
+        .col-sm-2: input.form-control
+        label.col-sm-1.col-form-label.text-xs-right Zip:
+        .col-sm-2: input.form-control
+      .form-group.row
+        label.col-sm-2.col-form-label.text-xs-right Beacon UUID:
+        .col-sm-7: input.form-control
+        label.col-sm-1.col-form-label.text-xs-right Major:
+        .col-sm-2: input.form-control
+    .col-sm-5.offset-xs-1
+      #logo-upload-container

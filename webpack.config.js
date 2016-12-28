@@ -47,7 +47,7 @@ module.exports = {
       test: /\.scss$/,
       loader: ExtractTextPlugin.extract({
         notExtractLoader: 'style-loader',
-        loader: 'css-loader!sass-loader'
+        loader: 'css-loader?camelCase!sass-loader'
       })
     }]
   }
