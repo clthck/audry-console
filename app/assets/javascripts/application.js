@@ -1,6 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
+import commonModule from './common.js';
 
 // Runs corresponding module per current controller#action route.
 function runModule() {
@@ -12,4 +13,7 @@ function runModule() {
   }
 }
 
-$(document).ready(runModule);
+$(document).ready(e => {
+  commonModule($(document.body));
+  runModule();
+});
