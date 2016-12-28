@@ -11,6 +11,7 @@ const parseBody = require('koa-body');
 const serveSass = require('koa.sass');
 const serveStatic = require('koa-static');
 const flash = require('koa-connect-flash');
+const methodOverride = require('koa-methodoverride');
 const passport = require('./config/initializers/passport.js')();
 const initRoutes = require('./config/initializers/routes.js');
 
@@ -54,6 +55,7 @@ app.use(async (ctx, next) => {
 app.use(parseBody());
 app.use(passport.initialize);
 app.use(passport.session);
+app.use(methodOverride('_method'));
 
 initRoutes(app, pug);
 
