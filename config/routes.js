@@ -19,5 +19,7 @@ module.exports = (routers) => {
     .get('root', '/', activities.index)
     .delete('logout', '/logout', sessions.destroy)
     .get('newHospital', '/configuration/hospitals/new', hospitals.new)
-    .post('hospitals', '/configuration/hospitals', hospitals.create);
+    .post('hospitals', '/configuration/hospitals', hospitals.create)
+    .get('editHospital', '/configuration/hospitals/:id/edit', hospitals.edit)
+    .patch('hospital', '/configuration/hospitals/:id', hospitals.update);
 };

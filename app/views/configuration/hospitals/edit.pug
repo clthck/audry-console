@@ -1,0 +1,42 @@
+extends ../../layouts/config
+
+block contents
+  .row.w-100.mt-6
+    form#hospital_form.w-100(
+      method='post'
+      action=router.hospitalPath(hospital.id)
+      enctype='multipart/form-data'
+      data-parsley-validate
+    )
+      input(type='hidden' name='_method' value='PATCH')
+      .col-sm-6
+        .form-group.row
+          label.col-sm-2.col-form-label.text-xs-right(for='name') Name:
+          .col-sm-4: input.form-control#name(name='name' value=hospital.name required)
+        .form-group.row
+          label.col-sm-2.col-form-label.text-xs-right(for='division') Division:
+          .col-sm-4: input.form-control#division(name='division' value=hospital.division required)
+        .form-group.row
+          label.col-sm-2.col-form-label.text-xs-right(for='address1') Address:
+          .col-sm-10: input.form-control#address1(name='address1' value=hospital.address1 required)
+        .form-group.row
+          .col-sm-10.offset-sm-2: input.form-control(name='address2' value=hospital.address2)
+        .form-group.row
+          label.col-sm-2.col-form-label.text-xs-right(for='city') City:
+          .col-sm-4: input.form-control#city(name='city' value=hospital.city required)
+          label.col-sm-1.col-form-label.text-xs-right(for='state') State:
+          .col-sm-2: select.custom-select.form-control#state(name='state' required)
+            != options_for_select(stateNames(), hospital.state)
+          label.col-sm-1.col-form-label.text-xs-right(for='zipcode') Zip:
+          .col-sm-2: input.form-control#zipcode(name='zipcode' value=hospital.zipcode required)
+        .form-group.row
+          label.col-sm-2.col-form-label.text-xs-right(for='beaconUuid') Beacon UUID:
+          .col-sm-7: input.form-control#beaconUuid(name='beaconUuid' value=hospital.beaconUuid required)
+          label.col-sm-1.col-form-label.text-xs-right(for='major') Major:
+          .col-sm-2: input.form-control#major(name='major' value=hospital.major required)
+      .col-sm-5.offset-xs-1
+        #logo-upload-container
+
+  script.
+    SHARED_DATA.hospital = !{JSON.stringify(hospital.toJSON())};
+    SHARED_DATA.navItemBackHref = '#{router.rootPath}';

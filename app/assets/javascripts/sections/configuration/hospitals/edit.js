@@ -6,24 +6,24 @@ import ReactDOM from 'react-dom';
 import ImageUpload from 'components/ImageUpload.js';
 
 export default domRoot => {
+  const { hospital, navItemBackHref } = SHARED_DATA;
+
   $('#nav_item_save a').data('target-form', $('#hospital_form'));
-  $('#nav_item_back a').addClass('disabled');
+  $('#nav_item_back a').attr('href', navItemBackHref);
 
   ReactDOM.render(
     <div>
       <ImageUpload
         title="Dark Background"
-        placeholderImage="/assets/logo-placeholder-dark-bg.png"
+        placeholderImage={hospital.logoDarkFileName}
         name="logoDarkFileName"
         className="mb-1"
         previewDivClassName="bg-inverse"
-        required
       />
       <ImageUpload
         title="Light Background"
-        placeholderImage="/assets/logo-placeholder-light-bg.png"
+        placeholderImage={hospital.logoLightFileName}
         name="logoLightFileName"
-        required
       />
     </div>,
     document.getElementById('logo-upload-container')
