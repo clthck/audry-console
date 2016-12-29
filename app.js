@@ -14,6 +14,7 @@ const flash = require('koa-connect-flash');
 const methodOverride = require('koa-methodoverride');
 const passport = require('./config/initializers/passport.js')();
 const initRoutes = require('./config/initializers/routes.js');
+const initHelpers = require('./config/initializers/helpers.js');
 
 // Initializes koa.js app.
 const app = new Koa();
@@ -58,11 +59,13 @@ app.use(passport.session);
 app.use(methodOverride('_method'));
 
 initRoutes(app, pug);
+initHelpers(pug);
 
 app.use(serveSass({
   mountAt: '/assets',
   src: './app/assets/stylesheets',
-  dest: './.tmp/stylesheets'
+  dest: './.tmp/stylesheets',
+  importPaths: ['./node_modules']
 }));
 app.use(mount('/assets', serveStatic('./public/assets/webpack')));
 app.use(mount('/assets', serveStatic('./node_modules')));
