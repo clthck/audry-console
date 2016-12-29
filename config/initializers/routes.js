@@ -13,13 +13,13 @@ const routers = {
 };
 
 const routerMock = {
-  url: name => {
+  url: (name, ...params) => {
     for (const i in routers) {
       if (routers[i].route(name)) {
-        return routers[i].url(name);
+        return routers[i].url(name, ...params);
       }
     }
-    return routers.unauthenticated.url(name);
+    return routers.unauthenticated.url(name, ...params);
   }
 };
 
@@ -90,7 +90,17 @@ module.exports = (app, pug) => {
     // Defines magic path helper properties.
     for (const layer of routers[i].stack) {
       if (layer.name) {
-        routerMock[layer.name + 'Path'] = routers[i].url(layer.name);
+        if (layer.paramNames.length > 0) {
+          routerMock[layer.name + 'Path'] = (...args) => {
+            if (typeof args[0] === 'object') {
+              return routers[i].url(layer.name, args[0]);
+            } else {
+              return routers[i].url(layer.name, ...args);
+            }
+          };
+        } else {
+          routerMock[layer.name + 'Path'] = routers[i].url(layer.name);
+        }
       }
     }
   }
