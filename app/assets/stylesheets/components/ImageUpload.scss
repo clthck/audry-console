@@ -18,7 +18,8 @@ $border-width: 1px;
 
     img {
       display: block;
-      height: $height;
+      max-height: $height;
+      max-width: $width;
       margin: 0 auto;
     }
   }
