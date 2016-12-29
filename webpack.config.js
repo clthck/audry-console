@@ -9,6 +9,7 @@ module.exports = {
       'babel-polyfill',
       'jquery-ujs',
       'bootstrap',
+      'parsleyjs'
     ],
     application: './app/assets/javascripts/application'
   },

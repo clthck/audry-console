@@ -44,12 +44,12 @@ export default class ImageUpload extends React.Component {
     const props = this.props;
 
     return (
-      <div className={[styles.topContainer, props.className].join(' ')} id={this.id}>
-        <input type="file" className={styles.file} accept="image/*" name={props.name} />
+      <div className={`${styles.topContainer} ${props.className}`} id={this.id}>
         <p className={styles.title}>{props.title}</p>
-        <div className={styles.preview}>
+        <div className={`${styles.preview} ${props.previewDivClassName}`}>
           <img src={props.placeholderImage} />
         </div>
+        <input type="file" className={styles.file} accept="image/*" name={props.name} required={props.required} data-parsley-required-message="You must select an image." />
       </div>
     );
   }
