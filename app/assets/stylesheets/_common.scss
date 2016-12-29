@@ -1,0 +1,11 @@
+.align-items-center {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.parsley-errors-list {
+  color: red;
+  list-style: none;
+  padding-left: 0;
+}

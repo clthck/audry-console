@@ -1,0 +1,8 @@
+@for $i from 4 through 6 {
+  $spacers: map-merge($spacers, (
+    $i: (
+      x: ($spacer-x * $i),
+      y: ($spacer-y * $i),
+    ),
+  ));
+}
