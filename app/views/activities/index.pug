@@ -1,6 +1,16 @@
 extends ../layouts/application
 
+block header-contents-followup
+  .row#top_navbar.bg-faded
+    nav.navbar.navbar-light
+      ul.nav.navbar-nav
+        li.nav-item.float-xs-right
+          a.btn.btn-outline-primary.btn(href=router.logoutPath data-method='delete') Logout
+
 block contents
-  .mx-auto
-    h1 Hello Pug!
-    a(href=router.logoutPath) Logout
+  .row.w-100.p-6
+    each app in apps
+      a(href=app.webPathDefault)
+        figure.figure.mr-5
+          img.figure-img(src=customImage(app.icon, 120, 120))
+          figcaption.figure-caption.text-xs-center= app.title

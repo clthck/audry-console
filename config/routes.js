@@ -15,6 +15,7 @@ module.exports = (routers) => {
   // Resources that require authentication.
   routers.authenticated
     .use(authentication.do)
+    .use(hospitals.ensureHospitalInfoExists)
     .get('root', '/', activities.index)
     .delete('logout', '/logout', sessions.destroy)
     .get('newHospital', '/configuration/hospitals/new', hospitals.new)
