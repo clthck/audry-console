@@ -3,7 +3,7 @@
 const {
   sessions, activities,
   concerns: { authentication },
-  configuration: { hospitals },
+  configuration: { hospitals, wards, rooms, beds },
 } = require('../app/controllers');
 
 module.exports = (routers) => {
@@ -21,5 +21,14 @@ module.exports = (routers) => {
     .get('newHospital', '/configuration/hospitals/new', hospitals.new)
     .post('hospitals', '/configuration/hospitals', hospitals.create)
     .get('editHospital', '/configuration/hospitals/:id/edit', hospitals.edit)
-    .patch('hospital', '/configuration/hospitals/:id', hospitals.update);
+    .patch('hospital', '/configuration/hospitals/:id', hospitals.update)
+    .get('wards', '/configuration/wards', wards.index)
+    .post('/configuration/wards', wards.create)
+    .get('ward', '/configuration/wards/:id', wards.show)
+    .get('rooms', '/configuration/wards/:wardId/rooms', rooms.index)
+    .post('/configuration/wards/:wardId/rooms', rooms.create)
+    .get('room', '/configuration/wards/:wardId/rooms/:id', rooms.show)
+    .get('beds', '/configuration/rooms/:roomId/beds', beds.index)
+    .post('/configuration/rooms/:roomId/beds', beds.create)
+    .get('bed', '/configuration/rooms/:roomId/beds/:id', beds.show);
 };

@@ -1,0 +1,6 @@
+@import "RoomList";
+
+:local
+.bed-list-header {
+  @extend .room-list-header;
+}

@@ -1,0 +1,10 @@
+$min-height: calc(100vh - 100px);
+$col-border-directions: left right;
+
+@each $direction in $col-border-directions {
+  :local
+  .col-border-#{$direction} {
+    min-height: $min-height;
+    border-#{$direction}: 1px solid rgba(0, 0, 0, .15);
+  }
+}
