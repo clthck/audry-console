@@ -1,3 +1,5 @@
+$fa-font-path: "font-awesome/fonts";
+
 @for $i from 4 through 6 {
   $spacers: map-merge($spacers, (
     $i: (
