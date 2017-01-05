@@ -19,7 +19,10 @@ module.exports = {
     if (hospital) {
       ctx.redirect(ctx.router.editHospitalPath(hospital.id));
     } else {
-      ctx.render('configuration/hospitals/new', { title: 'Hospital Configuration' });
+      ctx.render('configuration/hospitals/new', {
+        title: 'Hospital Configuration',
+        configOptionTitle: 'Hospital'
+      });
       return next();
     }
   },
@@ -33,7 +36,7 @@ module.exports = {
 
   edit: async (ctx, next) => {
     const hospital = await Hospital.findById(ctx.params.id);
-    ctx.render('configuration/hospitals/edit', { hospital });
+    ctx.render('configuration/hospitals/edit', { hospital, configOptionTitle: 'Hospital' });
     return next();
   },
 

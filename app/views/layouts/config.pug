@@ -6,10 +6,13 @@ block header-contents-followup
       ul.nav.navbar-nav
         li.nav-item: span.nav-link Configure:
         li.nav-item.dropdown
-          a.nav-link.dropdown-toggle#dropdownConfigButton(href='#' data-toggle='dropdown' aria-haspopup=true aria-expanded=false) Hospital
-          .dropdown-menu(aria-labelledby='dropdownConfigButton')
-            a.dropdown-item.active(href=router.newHospitalPath) Hospital
-            a.dropdown-item(href='#') Wards
+          a.nav-link.dropdown-toggle#dropdown_config_button(
+            href='#' data-toggle='dropdown' aria-haspopup=true aria-expanded=false
+          )
+            = configOptionTitle
+          .dropdown-menu(aria-labelledby='dropdown_config_button')
+            a.dropdown-item(href=router.newHospitalPath) Hospital
+            a.dropdown-item(href=router.wardsPath) Wards
             a.dropdown-item(href='#') Services
             a.dropdown-item(href='#') Service Levels
         li.nav-item.float-xs-right#nav_item_back
