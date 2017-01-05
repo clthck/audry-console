@@ -8,7 +8,31 @@ html
     link(rel='stylesheet' type='text/css' href='/assets/components.css')
 
     script.
-      window.SHARED_DATA = {};
+      window.SHARED_DATA = { router: {} };
+
+    //- Initializes router helper methods.
+    each v, k in router
+      if typeof v === 'function' && k !== 'url'
+        - routerMetaInfo = router[`${k}MetaInfo`]
+        script.
+          SHARED_DATA.router['!{k}'] = function () {
+            var n = Math.min(arguments.length, #{routerMetaInfo.paramNames.length});
+            var paramNames = !{JSON.stringify(routerMetaInfo.paramNames.map(info => info.name))};
+            var s = '#{routerMetaInfo.path}';
+            if (typeof arguments[0] === 'object') {
+              for (var k in arguments[0]) {
+                s = s.replace(new RegExp(':' + k + '\\b', 'g'), arguments[0][k]);
+              }
+            } else {
+              for (var i = 0; i < n; i ++) {
+                s = s.replace(new RegExp(':' + paramNames[i] + '\\b', 'g'), arguments[i]);
+              }
+            }
+            return s;
+          };
+      else if typeof v === 'string'
+        script.
+          SHARED_DATA.router['!{k}'] = '#{v}';
 
     script(src='/assets/manifest.js')
     script(src='/assets/vendor.js')

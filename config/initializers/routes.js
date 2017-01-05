@@ -98,6 +98,7 @@ module.exports = (app, pug) => {
               return routers[i].url(layer.name, ...args);
             }
           };
+          routerMock[layer.name + 'PathMetaInfo'] = layer;
         } else {
           routerMock[layer.name + 'Path'] = routers[i].url(layer.name);
         }
