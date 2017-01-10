@@ -18,17 +18,15 @@ export default class WardList extends React.Component {
 
   componentDidMount() {
     const { props, id: comId } = this;
-    const $containerEl = $(`#${comId}`);
     const { wards } = this.state;
+    const $containerEl = $(`#${comId}`);
+    const $form = $containerEl.find('form');
 
-    $containerEl.find('form').parsley();
+    $form.parsley();
 
     $containerEl
       .on('hidden.bs.modal', '.new-ward-modal', e => {
-        $(`#${comId}_name`).val('');
-        $(`#${comId}_description`).val('');
-        $(`#${comId}_floor`).val('');
-        $(`#${comId}_beaconMajor`).val('');
+        $form[0].reset();
       })
       .on('ajax:success', 'form', (e, data) => {
         $containerEl.find('.new-ward-modal').modal('hide');

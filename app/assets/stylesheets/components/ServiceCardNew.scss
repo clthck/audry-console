@@ -1,0 +1,28 @@
+$size: calc(160px + 2rem);
+
+:local
+.button {
+  color: rgba(0, 0, 0, .75);
+
+  &, &:hover, &:focus {
+    text-decoration: none;
+  }
+}
+
+:local
+.card-wrapper {
+  border: none;
+  background: none;
+  width: $size;
+
+  .card {
+    height: $size;
+
+    p {
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin: 0 auto;
+      width: 50%;
+    }
+  }
+}

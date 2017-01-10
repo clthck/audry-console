@@ -3,11 +3,11 @@
 import uuid from 'uuid';
 import React from 'react';
 import styles from 'comsass/WardConfig.scss';
-import WardList from 'components/WardList.js';
-import WardDetail from 'components/WardDetail.js';
-import RoomList from 'components/RoomList.js';
-import BedList from 'components/BedList.js';
-import BedDetail from 'components/BedDetail.js';
+import WardList from './WardList.js';
+import WardDetail from './WardDetail.js';
+import RoomList from './RoomList.js';
+import BedList from './BedList.js';
+import BedDetail from './BedDetail.js';
 
 export default class WardConfig extends React.Component {
   constructor(props) {

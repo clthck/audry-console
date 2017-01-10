@@ -21,11 +21,12 @@ export default class RoomList extends React.Component {
     try {
       const { props, id: comId } = this;
       const $containerEl = $(`#${comId}`);
+      const $form = $containerEl.find('form');
 
-      $containerEl.find('form').parsley();
+      $form.parsley();
       $containerEl
         .on('hidden.bs.modal', '.new-room-modal', e => {
-          $(`#${comId}_name`).val('');
+          $form[0].reset();
         })
         .on('ajax:success', 'form', (e, data) => {
           $containerEl.find('.new-room-modal').modal('hide');

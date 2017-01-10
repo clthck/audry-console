@@ -1,7 +1,7 @@
 'use strict';
 
-const { Hospital } = require('audry-common').models;
-const CloudinaryService = require('../../services/cloudinary_service.js');
+const { models, CloudinaryService } = require('audry-common');
+const { Hospital } = models;
 
 module.exports = {
   ensureHospitalInfoExists: async (ctx, next) => {

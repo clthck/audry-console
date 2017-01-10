@@ -3,7 +3,7 @@
 import $ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import WardConfig from 'components/WardConfig.js';
+import WardConfig from 'components/WardConfig';
 
 export default domRoot => {
   const { wards } = SHARED_DATA;

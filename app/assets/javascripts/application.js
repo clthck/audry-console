@@ -10,6 +10,7 @@ function runModule() {
     require(`./sections/${path}`).default($(document.body));
   } catch (err) {
     // Just ignores error for now.
+    console.error(err);
   }
 }
 

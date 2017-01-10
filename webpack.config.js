@@ -20,6 +20,7 @@ module.exports = {
   resolve: {
     alias: {
       components: path.resolve('./app/assets/javascripts/components'),
+      lib: path.resolve('./app/assets/javascripts/lib'),
       comsass: path.resolve('./app/assets/stylesheets/components')
     }
   },

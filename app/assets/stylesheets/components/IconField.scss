@@ -1,0 +1,15 @@
+:local
+.main-card {
+  border: none;
+  background: none;
+  width: calc(160px + 2rem);
+
+  .service-icon {
+    width: 160px;
+  }
+
+  .title {
+    color: rgba(255, 255, 255, .95);
+    word-wrap: break-word;
+  }
+}

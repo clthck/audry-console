@@ -22,7 +22,7 @@
   "homepage": "https://github.com/uphack/audry-console#readme",
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.5",
-    "cloudinary": "^1.4.6",
+    "cloudinary": "^1.5.0",
     "dotenv": "^2.0.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.1.1",

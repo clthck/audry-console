@@ -13,12 +13,22 @@ export default domRoot => {
   // Event handlers for nav items on configuration scope
   $('header').on('click', '#nav_item_save a', e => {
     e.preventDefault();
+
     const $this = $(e.target);
     const $form = $this.data('target-form');
-    if ($form[0].checkValidity()) {
-      $this.addClass('disabled').text('Saving...');
-      $('#nav_item_back a').addClass('disabled');
+
+    if ($form) {
+      if ($form[0].checkValidity()) {
+        $this.addClass('disabled').text('Saving...');
+        $('#nav_item_back a').addClass('disabled');
+      }
+      $form.submit();
     }
-    $form.submit();
+    else {
+      const func = $this.data('handler-func');
+      if (func) {
+        func(e);
+      }
+    }
   });
 }

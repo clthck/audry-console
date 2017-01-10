@@ -21,16 +21,13 @@ export default class BedList extends React.Component {
     try {
       const { props, id: comId } = this;
       const $containerEl = $(`#${comId}`);
+      const $form = $containerEl.find('form');
 
-      $containerEl.find('form').parsley();
+      $form.parsley();
+
       $containerEl
         .on('hidden.bs.modal', '.new-bed-modal', e => {
-          $(`#${comId}_name`).val('');
-          $(`#${comId}_beaconMinor`).val('');
-          $(`#${comId}_buttonId`).val('');
-          $(`#${comId}_taskLightId`).val('');
-          $(`#${comId}_mainLightId`).val('');
-          $(`#${comId}_remoteId`).val('');
+          $form[0].reset();
         })
         .on('ajax:success', 'form', (e, data) => {
           $containerEl.find('.new-bed-modal').modal('hide');
