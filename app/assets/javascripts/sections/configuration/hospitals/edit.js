@@ -15,14 +15,14 @@ export default domRoot => {
     <div>
       <ImageUpload
         title="Dark Background"
-        placeholderImage={hospital.logoDarkFileName}
+        placeholderImage={hospital.logoDarkFileName || '/assets/logo-placeholder-dark-bg.png'}
         name="logoDarkFileName"
         className="mb-1"
         previewDivClassName="bg-inverse"
       />
       <ImageUpload
         title="Light Background"
-        placeholderImage={hospital.logoLightFileName}
+        placeholderImage={hospital.logoLightFileName || '/assets/logo-placeholder-light-bg.png'}
         name="logoLightFileName"
       />
     </div>,
