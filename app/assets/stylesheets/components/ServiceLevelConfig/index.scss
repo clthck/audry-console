@@ -1,0 +1,17 @@
+@import "../WardConfig/RoomList";
+
+:local
+.service-config-header {
+  @extend .room-list-header;
+}
+
+:local
+.service-category {
+  border-top: 1px solid rgba(0, 0, 0, .15);
+
+  &:first-child {
+    border-top: none;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+}

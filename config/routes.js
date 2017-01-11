@@ -3,7 +3,9 @@
 const {
   sessions, activities,
   concerns: { authentication },
-  configuration: { hospitals, wards, rooms, beds, serviceCategories },
+  configuration: {
+    hospitals, wards, rooms, beds, serviceCategories, wardsServiceCategories
+  },
 } = require('../app/controllers');
 
 module.exports = (routers) => {
@@ -32,5 +34,7 @@ module.exports = (routers) => {
     .post('/configuration/rooms/:roomId/beds', beds.create)
     .get('bed', '/configuration/rooms/:roomId/beds/:id', beds.show)
     .get('serviceCategories', '/configuration/serviceCategories', serviceCategories.index)
-    .post('serviceCategoriesBulkCreate', '/configuration/serviceCategories/bulkCreate', serviceCategories.bulkCreate);
+    .post('serviceCategoriesBulkCreate', '/configuration/serviceCategories/bulkCreate', serviceCategories.bulkCreate)
+    .get('wardsServiceCategories', '/configuration/wardsServiceCategories', wardsServiceCategories.index)
+    .post('wardsServiceCategoriesBulkUpdate', '/configuration/wardsServiceCategories/bulkUpdate', wardsServiceCategories.bulkUpdate);
 };

@@ -3,7 +3,7 @@
 import React from 'react';
 import uuid from 'uuid';
 import $ from 'jquery';
-import styles from 'comsass/IconField.scss';
+import styles from 'comsass/ServiceConfig/ServiceForm/IconField.scss';
 
 export default class __ extends React.Component {
   constructor(props) {

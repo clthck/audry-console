@@ -1,0 +1,25 @@
+:local
+.wrapper {
+  font-size: .8rem;
+  padding: .5rem 1rem;
+
+  &.yellow {
+    background-color: yellow;
+  }
+
+  &.orange {
+    background-color: orange;
+    color: white;
+  }
+
+  &.red {
+    background-color: red;
+    color: white;
+  }
+
+  input {
+    font-size: inherit;
+    margin: 0 .5rem;
+    width: 100px;
+  }
+}

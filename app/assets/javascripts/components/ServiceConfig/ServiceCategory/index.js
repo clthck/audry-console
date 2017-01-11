@@ -2,7 +2,7 @@
 
 import uuid from 'uuid';
 import React from 'react';
-import styles from 'comsass/ServiceCategory.scss';
+import styles from 'comsass/ServiceConfig/ServiceCategory/index.scss';
 import ServiceCard from './ServiceCard.js';
 import ServiceCardNew from './ServiceCardNew.js';
 
@@ -30,7 +30,7 @@ export default class ServiceCategory extends React.Component {
 
   render() {
     const { id: comId } = this;
-    const { className, onClickAddNew, categoryData: category } = this.props;
+    const { className, categoryData: category } = this.props;
     const { services } = this.state;
 
     return (

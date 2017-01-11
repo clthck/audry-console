@@ -2,13 +2,16 @@
 
 import $ from 'jquery';
 
-export default domRoot => {
-  const $dropdownConfigButton = $('#dropdown_config_button');
-
-  $dropdownConfigButton
+function highlightCurrentListItemInDropdown() {
+  this
     .next('.dropdown-menu')
     .find('a')
-    .each((i, e) => $(e).toggleClass('active', $(e).text() === $dropdownConfigButton.text()));
+    .each((i, e) => $(e).toggleClass('active', $(e).text() === this.text()));
+};
+
+export default domRoot => {
+  $('#dropdown_config_button')::highlightCurrentListItemInDropdown();
+  $('#dropdown_ward_select_button')::highlightCurrentListItemInDropdown();
 
   // Event handlers for nav items on configuration scope
   $('header').on('click', '#nav_item_save a', e => {

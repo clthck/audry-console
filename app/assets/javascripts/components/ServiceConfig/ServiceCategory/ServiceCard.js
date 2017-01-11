@@ -3,7 +3,7 @@
 import uuid from 'uuid';
 import React from 'react';
 import $ from 'jquery';
-import styles from 'comsass/ServiceCard.scss';
+import styles from 'comsass/ServiceConfig/ServiceCategory/ServiceCard.scss';
 
 export default class ServiceCard extends React.Component {
   constructor(props) {

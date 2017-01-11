@@ -1,0 +1,23 @@
+:local
+.header {
+  justify-content: space-between;
+}
+
+:local
+.title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  transform: rotate(-90deg) translate(-96px, -72px);
+  width: calc(160px + 2rem);
+}
+
+:local
+.services-wrapper {
+  display: flex;
+  flex-direction: row;
+  min-height: 216px;
+
+  .service-card:first-child {
+    margin-left: 0 !important;
+  }
+}

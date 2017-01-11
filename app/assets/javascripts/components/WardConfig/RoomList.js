@@ -3,7 +3,7 @@
 import uuid from 'uuid';
 import $ from 'jquery';
 import React from 'react';
-import styles from 'comsass/RoomList.scss';
+import styles from 'comsass/WardConfig/RoomList.scss';
 
 const { router } = SHARED_DATA;
 

@@ -2,7 +2,7 @@
 
 import uuid from 'uuid';
 import React from 'react';
-import styles from 'comsass/WardConfig.scss';
+import styles from 'comsass/WardConfig/index.scss';
 import WardList from './WardList.js';
 import WardDetail from './WardDetail.js';
 import RoomList from './RoomList.js';

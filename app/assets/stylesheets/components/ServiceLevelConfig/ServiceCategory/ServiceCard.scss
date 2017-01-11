@@ -1,0 +1,32 @@
+:local
+
+.wrapper {
+  position: relative;
+
+  .main-card {
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: calc(160px + 2rem);
+
+    &.service-invisible {
+      opacity: .4;
+    }
+
+    .service-icon {
+      width: 160px;
+    }
+
+    .title {
+      color: rgba(255, 255, 255, .95);
+      word-wrap: break-word;
+    }
+  }
+
+  .corner-button {
+    cursor: pointer;
+    position: absolute;
+    right: -8px;
+    top: -8px;
+  }
+}

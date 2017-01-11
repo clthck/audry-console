@@ -2,7 +2,7 @@
 
 import uuid from 'uuid';
 import React from 'react';
-import styles from 'comsass/ServiceCardNew.scss';
+import styles from 'comsass/ServiceConfig/ServiceCategory/ServiceCardNew.scss';
 
 export default class ServiceCardNew extends React.Component {
   constructor(props) {

@@ -14,8 +14,19 @@ block header-contents-followup
             a.dropdown-item(href=router.newHospitalPath) Hospital
             a.dropdown-item(href=router.wardsPath) Wards
             a.dropdown-item(href=router.serviceCategoriesPath) Services
-            a.dropdown-item(href='#') Service Levels
+            a.dropdown-item(href=router.wardsServiceCategoriesPath) Service Levels
+        if showWardDropdown
+          li.nav-item.ml-3: span.nav-link Ward:
+          li.nav-item.dropdown
+            a.nav-link.dropdown-toggle#dropdown_ward_select_button(
+              href='#' data-toggle='dropdown' aria-haspopup=true aria-expanded=false
+              data-ward-id=currentWard.id
+            )
+              = currentWard.name
+            .dropdown-menu(aria-labelledby='dropdown_ward_select_button')
+              each ward in wards
+                a.dropdown-item(href=`${router.wardsServiceCategoriesPath}?wardId=${ward.id}`)= ward.name
         li.nav-item.float-xs-right#nav_item_back
-          a.btn.btn-outline-primary.btn(href='#') Back
+          a.btn.btn-outline-primary.btn(href=router.rootPath) Back
         li.nav-item.float-xs-right#nav_item_save
           a.btn.btn-outline-primary.btn(href='#') Save
